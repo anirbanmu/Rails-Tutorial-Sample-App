@@ -3,7 +3,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: {maximum: 255},
                     format: {with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i},
                     uniqueness: {case_sensitive: false}
-  validates :password, presence: true, length: {minimum: 6}
+  validates :password, presence: true, length: {minimum: 6}, allow_nil: true
   before_save {email.downcase!}
   has_secure_password
   attr_accessor :remember_token
