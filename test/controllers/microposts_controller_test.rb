@@ -17,4 +17,13 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
       delete micropost_path(@micropost)
     end
   end
+
+  test 'wrong user cannot delete a post' do
+    log_in_as(users(:michael))
+    micropost = microposts(:ants)
+    assert_no_difference 'Micropost.count' do
+      delete micropost_path(micropost)
+    end
+    assert_redirected_to root_url
+  end
 end
